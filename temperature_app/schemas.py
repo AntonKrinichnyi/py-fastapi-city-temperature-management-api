@@ -1,7 +1,7 @@
 from typing import Optional
 from datetime import datetime
 
-from pydentic import BaseModel
+from pydantic import BaseModel
 
 
 class CityBaseSchema(BaseModel):
@@ -11,4 +11,5 @@ class CityBaseSchema(BaseModel):
 
 class TemperatureBaseSchema(BaseModel):
     city_id: int
+    temerature: float
     date_time: datetime

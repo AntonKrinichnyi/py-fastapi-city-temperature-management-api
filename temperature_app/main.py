@@ -66,15 +66,6 @@ async def get_temperature_by_city_id(city_id: int,
 
 
 @app.get("/temperatures/", status_code=status.HTTP_200_OK)
-async def get_temperatures(city_id: int,
-                            start_date: str,
-                            end_date: str,
-                            db: AsyncSession = Depends(get_db)
-                            ) -> list[TemperatureModel]:
-    city_exists = await get_single_city_from_db(db, city_id)
-    if not city_exists:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="City not found")
-    db_temperatures = await get_temperatures_from_db(db, city_id,
-                                                     start_date, end_date)
+async def get_temperatures(db: AsyncSession = Depends(get_db)) -> list[TemperatureModel]:
+    db_temperatures = await get_temperatures_from_db()
     return db_temperatures

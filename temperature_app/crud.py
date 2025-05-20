@@ -38,7 +38,9 @@ async def create_temperature_in_db(
         TemperatureBaseSchema
         ) -> TemperatureModel:
     db_temperature = TemperatureModel(
-        city_id=temperature.city_id, date_time=temperature.date_time
+        city_id=temperature.city_id,
+        temperature=temperature.temerature,
+        date_time=temperature.date_time
     )
     db.add(db_temperature)
     await db.commit()
@@ -58,14 +60,9 @@ async def get_temperature_by_city_id_from_db(
 
 
 async def get_temperatures_from_db(
-        db: AsyncSession, city_id: int, start_date: datetime,
-        end_date: datetime
+        db: AsyncSession
 ) -> List[TemperatureModel]:
-    db_temperatures = select(TemperatureModel).where(
-        TemperatureModel.city_id == city_id,
-        TemperatureModel.date_time >= start_date,
-        TemperatureModel.date_time <= end_date
-    )
+    db_temperatures = select(TemperatureModel)
     result = await db.execute(db_temperatures)
     db_temperatures = result.scalars().all()
     return [temperature for temperature in db_temperatures]
