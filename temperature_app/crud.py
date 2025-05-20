@@ -39,7 +39,7 @@ async def create_temperature_in_db(
         ) -> TemperatureModel:
     db_temperature = TemperatureModel(
         city_id=temperature.city_id,
-        temperature=temperature.temerature,
+        temperature=temperature.temperature,
         date_time=temperature.date_time
     )
     db.add(db_temperature)

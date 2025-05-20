@@ -11,5 +11,5 @@ class CityBaseSchema(BaseModel):
 
 class TemperatureBaseSchema(BaseModel):
     city_id: int
-    temerature: float
+    temperature: float
     date_time: datetime
